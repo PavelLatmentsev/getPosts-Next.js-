@@ -33,13 +33,10 @@
 
 
 //-------c zustand
-"use client"
 import PostSearch from "@/components/PostSearch";
 import Posts from "@/components/Posts";
-import { usePosts } from "@/store";
 import { Metadata } from "next"
-import { useEffect } from "react";
-import { shallow } from "zustand/shallow";
+
 
 export const metadata: Metadata = {
     title: 'Blog Next App',
@@ -48,18 +45,12 @@ export const metadata: Metadata = {
   
 const Blog =  () => {
 
-    const [posts, loading, getPosts]=usePosts((state) => [state.posts, state.loading, state.getPosts], shallow);
-
-    useEffect(() => {
-        getPosts()
-    },[getPosts]);
-    
     return (
     
     <>
         <h1>Blog Page</h1> 
         <PostSearch/>
-        {loading ? <h3>Loading</h3> :<Posts posts={posts}/> } 
+        <Posts/>
     </>
  );
 }
