@@ -14,9 +14,20 @@ navLink:NavLink[]
 }
 const Navigation = ({navLink}: Props) => {
     const pathname = usePathname();
-    return ( <div>
+    return ( <>{navLink.map(link =>{
+        const isActive = pathname===link.href
 
-    </div> );
+        return (<Link 
+        href={link.href}
+        key={link.label}
+        className={isActive ? "active" : ""}>
+        
+        {link.label}
+        
+        </Link>)
+    })}
+           
+    </> );
 }
  
 export { Navigation};

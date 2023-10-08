@@ -10,7 +10,7 @@ const navItems = [
 const Header = () => {
     return ( 
         <header className="container">
-<Navigation navLink={navItems}/>
+           <Navigation navLink={navItems}/>
         </header>
      );
 }
