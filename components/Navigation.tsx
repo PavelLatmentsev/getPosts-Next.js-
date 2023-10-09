@@ -1,5 +1,6 @@
 "use client"
 
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -14,6 +15,8 @@ navLink:NavLink[]
 }
 const Navigation = ({navLink}: Props) => {
     const pathname = usePathname();
+    const session = useSession();
+
     return ( <>{navLink.map(link =>{
         const isActive = pathname===link.href
 
@@ -25,8 +28,11 @@ const Navigation = ({navLink}: Props) => {
         {link.label}
         
         </Link>)
+
+        {session?.data && (<Link href="/profile">Profile</Link>)}
     })}
            
+    
     </> );
 }
  
