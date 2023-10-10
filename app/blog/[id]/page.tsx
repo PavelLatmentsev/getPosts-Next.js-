@@ -1,3 +1,4 @@
+import getPosts from "@/servises/getPosts";
 import { Metadata } from "next";
 
 async function getPost(id:string) {
@@ -11,6 +12,13 @@ async function getPost(id:string) {
 
 type Props = {
     params: { id: string}
+}
+
+export async function generateStaticParams() {
+    const posts:any[] =await getPosts();
+    return posts.map((post) => ({
+        slug:post.id.toString(),
+    }))
 }
 export async function generateMetadata({params:{id}}: Props): Promise<Metadata> {
     const post = await getPost(id);
