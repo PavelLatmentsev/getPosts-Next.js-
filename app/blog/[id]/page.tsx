@@ -14,12 +14,12 @@ type Props = {
     params: { id: string}
 }
 
-export async function generateStaticParams() {
-    const posts:any[] =await getPosts();
-    return posts.map((post) => ({
-        slug:post.id.toString(),
-    }))
-}
+// export async function generateStaticParams() {
+//     const posts:any[] =await getPosts();
+//     return posts.map((post) => ({
+//         slug:post.id.toString(),
+//     }))
+// }
 export async function generateMetadata({params:{id}}: Props): Promise<Metadata> {
     const post = await getPost(id);
     return {
