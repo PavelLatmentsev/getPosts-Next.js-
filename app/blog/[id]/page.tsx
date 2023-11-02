@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { revalidatePath } from "next/cache";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 async function getPost(id:string) {
@@ -48,6 +49,8 @@ const Post = async ({params: {id}} :Props) => {
         <form action={removePost.bind(null, id)}>
         <input type="submit" value="delete post" />
         </form>
+
+        <Link href={`/blog/${id}/edit`}>Edit</Link>
         </>
        );
 }
