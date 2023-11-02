@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "framer-motion": "^10.16.4",
+    "immer": "^10.0.3",
     "next": "^14.0.1",
     "next-auth": "^4.23.2",
     "react": "^18.2.0",

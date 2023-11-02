@@ -33,10 +33,11 @@
 
 
 //-------c zustand
+import NewPostForm from "@/components/CreatePost";
 import PostSearch from "@/components/PostSearch";
 import Posts from "@/components/Posts";
 import { Metadata } from "next"
-
+import { revalidatePath } from "next/cache";
 
 export const metadata: Metadata = {
     title: 'Blog Next App',
@@ -51,7 +52,17 @@ const Blog =  () => {
         <h1>Blog Page</h1> 
         <PostSearch/>
         <Posts/>
+
+        <hr />
+<NewPostForm onSucces={async () => {
+      "use server"
+
+     revalidatePath("/blog")
+    }}/>
+        
     </>
+
+    
  );
 }
  

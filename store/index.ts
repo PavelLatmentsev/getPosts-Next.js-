@@ -7,6 +7,7 @@ type UsePosts = {
     loading: boolean;
     getPosts:() => Promise<void>;
     getPostsBySearch:(value:string)=> Promise<void>;
+    addPost: (post: object) => void
 }
 
 export const usePosts = create<UsePosts>()((set)=> ({
@@ -21,5 +22,9 @@ export const usePosts = create<UsePosts>()((set)=> ({
         set({loading: true});
         const posts = await getPostsBySearch(search);
         set({posts:posts, loading:false})
-    }
+    },
+    addPost:(post) =>set((state) => {
+     return {   posts: [...state.posts, post]}   
+    }),
+
 }))

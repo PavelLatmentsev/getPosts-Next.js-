@@ -1,10 +1,9 @@
-import getPosts from "@/servises/getPosts";
 import { Metadata } from "next";
 
 async function getPost(id:string) {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
         next: {
-            revalidate:60
+            revalidate:10
         }
     })
     return response.json();
