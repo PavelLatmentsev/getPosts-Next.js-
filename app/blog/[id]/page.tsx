@@ -1,4 +1,6 @@
 import { Metadata } from "next";
+import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 async function getPost(id:string) {
     const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
@@ -25,12 +27,27 @@ export async function generateMetadata({params:{id}}: Props): Promise<Metadata> 
         title: post.title,
     }
 }
+
+async function removePost(id:string) {
+    "use server"
+    await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {method: "DELETE",
+    headers: {"Content-type": "application/json"}
+})
+
+    revalidatePath("/blog");
+    redirect("/blog");
+}
+
 const Post = async ({params: {id}} :Props) => {
     const post = await getPost(id);
     return (
         <>
         <h1>{post.title}</h1>
         <p>{post.body}</p>
+
+        <form action={removePost.bind(null, id)}>
+        <input type="submit" value="delete post" />
+        </form>
         </>
        );
 }
